@@ -1,4 +1,5 @@
 import React from 'react';
+import Block from './Block';
 
 class Blocks extends React.Component {
    state = { blocks: [] };
@@ -18,7 +19,7 @@ class Blocks extends React.Component {
             {
                this.state.blocks.map(block => {
                   return (
-                     <div key={block.hash}>{block.hash}</div>
+                     <Block key={block.hash} block={block} />
                   );
                })
             }
