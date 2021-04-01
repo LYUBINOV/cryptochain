@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import history from '../history';
 
 class ConductTransaction extends React.Component {
    state = { recipient: '', amount: 0};
@@ -18,7 +19,7 @@ class ConductTransaction extends React.Component {
    conductTransaction = () => {
       const { recipient, amount } = this.state;
 
-      fetch('http://localhost:3000/api/transact', {
+      fetch(`${document.location.origin}/api/transact`, {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({ recipient, amount })
@@ -26,6 +27,7 @@ class ConductTransaction extends React.Component {
       .then(response => response.json())
       .then(json => {
          alert(json.message || json.type);
+         history.push('/transaction-pool');
       });
    }
    
